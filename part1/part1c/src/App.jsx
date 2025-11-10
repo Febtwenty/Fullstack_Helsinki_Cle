@@ -1,25 +1,10 @@
-const Hello = ({name, age}) => {
-  console.log(name, age)
-
-  const bornYear = () => new Date().getFullYear() - age
-
-  return (
-    <div>
-      <p>Hello {name}, you are {age} years old. I guess.</p>
-      <p>So youe were born in {bornYear()}?</p>
-    </div>
-  )
-}
-
-const App = () => {
-  const name = 'Peter'
-  const age = 10
+const App = (props) => {
+  const {counter} = props
+  console.log(counter)
 
   return (
     <div>
-      <h1>Greetings!</h1>
-      <Hello name='Maya' age={26+10} />
-      <Hello name={name} age={age} />
+      {counter}
     </div>
   )
 }
