@@ -56,3 +56,17 @@ const sum = (p1, p2) => {
 
 const result = sum(2, 5)
 console.log(result)
+
+// classes
+class Person {
+    constructor(name, age) {
+        this.name = name
+        this.age = age
+    }
+    greet() {
+        console.log('Hello, my name is ' + this.name + '!')
+    }
+}
+
+const Berta = new Person('Berta Gaga', 40)
+Berta.greet()
