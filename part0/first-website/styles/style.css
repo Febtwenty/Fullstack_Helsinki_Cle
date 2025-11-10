@@ -75,3 +75,8 @@ button {
   margin-left: 0.5em;
   font: 1em "Montserrat", sans-serif;
 }
+
+.done {
+  color: darkseagreen;
+  text-decoration: line-through solid black 2px;
+}
