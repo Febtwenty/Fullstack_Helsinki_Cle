@@ -22,7 +22,7 @@ const App = () => {
       },
       {
         name: 'Lessons for Life',
-        exercises: 0,
+        exercises: 7,
         id: 4
       }
     ]
