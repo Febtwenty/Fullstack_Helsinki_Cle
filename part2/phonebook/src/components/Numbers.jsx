@@ -5,11 +5,14 @@ const Numbers = ({ persons, filter }) => {
     )
 
   return (
-    <ul>
-        {personsToShow.map(person => 
-            <li key={person.name}>{person.name} {person.number}</li>
-        )}
-    </ul>
+    <div>
+        <h2>Numbers</h2>
+        <ul>
+            {personsToShow.map(person => 
+                <li key={person.name}>{person.name} {person.number}</li>
+            )}
+        </ul>
+    </div>
   )
 }
 
