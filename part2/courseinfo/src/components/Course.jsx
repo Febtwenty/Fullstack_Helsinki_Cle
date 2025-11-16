@@ -2,6 +2,7 @@ const Course = ({ course }) => {
     console.log(course)
 
     const exercises = course.parts.map(part => part.exercises)
+    
     const totalExercises = exercises.reduce((accumulator, currentValue) => accumulator + currentValue, 0)
 
     return (
