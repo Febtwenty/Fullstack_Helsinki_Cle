@@ -1,8 +1,8 @@
-const Numbers = ({ numbers }) => {
+const Numbers = ({ persons }) => {
   return (
     <ul>
-        {numbers.map(number => 
-            <li key={number.name}>{number.name}</li>
+        {persons.map(person => 
+            <li key={person.name}>{person.name} {person.number}</li>
         )}
     </ul>
   )
