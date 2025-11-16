@@ -9,9 +9,14 @@ const App = () => {
 
   const addName = (e) => {
     e.preventDefault()
-    console.log(newName)
-    setPersons(persons.concat({name: newName}))
-    setNewName('')
+    const checkNames = persons.map(person => person.name)
+    
+    if (checkNames.includes(newName)) {
+      alert(`${newName} was already added to phonebook.`)
+    } else {
+      setPersons(persons.concat({name: newName}))
+      setNewName('')
+    }
   }
 
   return (
@@ -26,9 +31,6 @@ const App = () => {
         <div>
           <button type="submit">add</button>
         </div>
-
-        <div>debug: {newName}</div>
-
       </form>
 
       <h2>Numbers</h2>
