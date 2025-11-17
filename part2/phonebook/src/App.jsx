@@ -4,11 +4,12 @@ import Filter from './components/Filter'
 import AddNew from './components/AddNew'
 
 const App = () => {
-  const [persons, setPersons] = useState([
+  const initialPhonebook = [
     { name: 'Arto Hellas', number: '040-1234567' },
     { name: 'Felix Frise', number: '040-3453463' },
     { name: 'Aldo Palermo', number: '040-867543' }
-  ]) 
+  ]
+  const [persons, setPersons] = useState(initialPhonebook)
   const [newName, setNewName] = useState('')
   const [newNumber, setNewNumber] = useState('')
   const [filter, setFilter] = useState('')
@@ -29,7 +30,6 @@ const App = () => {
   return (
     <div>
       <h2>Phonebook</h2>
-      
       <Filter filter={filter} setFilter={setFilter}/>
       <AddNew addEntry={addEntry} newName={newName} setNewName={setNewName} newNumber={newNumber} setNewNumber={setNewNumber}/>
       <Numbers persons={persons} filter={filter}/>
