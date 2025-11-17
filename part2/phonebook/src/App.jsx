@@ -1,18 +1,25 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import axios, { Axios } from 'axios'
 import Numbers from './components/Numbers'
 import Filter from './components/Filter'
 import AddNew from './components/AddNew'
 
 const App = () => {
-  const initialPhonebook = [
-    { name: 'Arto Hellas', number: '040-1234567' },
-    { name: 'Felix Frise', number: '040-3453463' },
-    { name: 'Aldo Palermo', number: '040-867543' }
-  ]
-  const [persons, setPersons] = useState(initialPhonebook)
+  const [persons, setPersons] = useState([])
   const [newName, setNewName] = useState('')
   const [newNumber, setNewNumber] = useState('')
   const [filter, setFilter] = useState('')
+
+  const hook = () => {
+    console.log('effect')
+    axios
+      .get('http://localhost:3001/persons')
+      .then(response => {
+        console.log('promise fulfilled')
+        setPersons(response.data)
+      })
+  }
+  useEffect(hook, [])
 
   const addEntry = (e) => {
     e.preventDefault()
