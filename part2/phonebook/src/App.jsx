@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react'
-import axios, { Axios } from 'axios'
 import Numbers from './components/Numbers'
 import Filter from './components/Filter'
 import AddNew from './components/AddNew'
@@ -40,7 +39,7 @@ const App = () => {
       <h2>Phonebook</h2>
       <Filter filter={filter} setFilter={setFilter}/>
       <AddNew addEntry={addEntry} newName={newName} setNewName={setNewName} newNumber={newNumber} setNewNumber={setNewNumber}/>
-      <Numbers persons={persons} filter={filter}/>
+      <Numbers persons={persons} filter={filter} setPersons={setPersons}/>
     </div>
   )
 }
