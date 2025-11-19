@@ -3,12 +3,14 @@ import Numbers from './components/Numbers'
 import Filter from './components/Filter'
 import AddNew from './components/AddNew'
 import phonebookServices from './services/phonebook'
+import Notification from './components/Notification'
 
 const App = () => {
   const [persons, setPersons] = useState([])
   const [newName, setNewName] = useState('')
   const [newNumber, setNewNumber] = useState('')
   const [filter, setFilter] = useState('')
+  const [nameNotification, setNameNotification] = useState(null)
 
   const hook = () => {
     phonebookServices
@@ -39,12 +41,17 @@ const App = () => {
           setNewName('')
           setNewNumber('')
         })
+      setNameNotification(newName)
+      setTimeout(() => {
+        setNameNotification(null)
+      }, 3000)
     }
   }
 
   return (
     <div>
       <h2>Phonebook</h2>
+      <Notification newName={nameNotification}/>
       <Filter filter={filter} setFilter={setFilter}/>
       <AddNew addEntry={addEntry} newName={newName} setNewName={setNewName} newNumber={newNumber} setNewNumber={setNewNumber}/>
       <Numbers persons={persons} filter={filter} setPersons={setPersons}/>

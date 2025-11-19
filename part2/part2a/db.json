@@ -53,7 +53,12 @@
     {
       "id": "ebc1",
       "content": "Hallo 2",
-      "important": false
+      "important": true
+    },
+    {
+      "id": "5d59",
+      "content": "Hallo Sarah",
+      "important": true
     }
   ]
 }
