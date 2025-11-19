@@ -4,6 +4,7 @@ import Filter from './components/Filter'
 import AddNew from './components/AddNew'
 import phonebookServices from './services/phonebook'
 import Notification from './components/Notification'
+import ErrorMessage from './components/ErrorMessage'
 
 const App = () => {
   const [persons, setPersons] = useState([])
@@ -11,6 +12,7 @@ const App = () => {
   const [newNumber, setNewNumber] = useState('')
   const [filter, setFilter] = useState('')
   const [nameNotification, setNameNotification] = useState(null)
+  const [errorMessage, setErrorMessage] = useState(null)
 
   const hook = () => {
     phonebookServices
@@ -32,6 +34,15 @@ const App = () => {
           .then(response => {
             setPersons(persons.map(p => p.id === personToChange.id ? response : p))
           })
+          .catch(error => {
+            setErrorMessage(
+              `Information of ${newName} has already been removed from the server.`
+            )
+            setTimeout(() => {
+              setErrorMessage(null)
+            }, 3000)
+            setPersons(persons.filter(n => n.name !== newName))
+          })
       }
     } else {
       phonebookServices
@@ -52,6 +63,7 @@ const App = () => {
     <div>
       <h2>Phonebook</h2>
       <Notification newName={nameNotification}/>
+      <ErrorMessage message={errorMessage} />
       <Filter filter={filter} setFilter={setFilter}/>
       <AddNew addEntry={addEntry} newName={newName} setNewName={setNewName} newNumber={newNumber} setNewNumber={setNewNumber}/>
       <Numbers persons={persons} filter={filter} setPersons={setPersons}/>
