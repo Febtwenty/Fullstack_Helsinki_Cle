@@ -15,6 +15,13 @@ const Countries = ({ listOfCountryNames, newCountry, countryData }) => {
             country.name.common.toLowerCase().includes(newCountry.toLowerCase())
         )
         console.log(dataOfSingleCountry)
+        const languagesCountry = []
+        for (const [key, value] of Object.entries(dataOfSingleCountry[0].languages)) {
+            console.log(`${key}: ${value}`)
+            languagesCountry = languagesCountry.concat(value)
+        }
+        console.log(dataOfSingleCountry[0].languages)
+        console.log(languagesCountry)
 
         return (
             <div>
