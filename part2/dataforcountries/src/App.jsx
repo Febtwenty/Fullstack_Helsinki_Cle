@@ -6,6 +6,7 @@ function App() {
   const [newCountry, setNewCountry] = useState('')
   const [countryData, setCountryData] = useState([])
   const [listOfCountryNames, setListOfCountryNames] = useState([])
+  const [countryToShow, setCountryToShow] = useState('')
 
   useEffect(() => {
     console.log('fetching countries list...')
@@ -17,13 +18,12 @@ function App() {
         setCountryData(dataOfCountries)
       })
   }, [])
-  console.log(listOfCountryNames.length)
-  console.log(countryData)
+  // console.log(countryData)
 
   return (
     <>
       <div>Find country: <input value={newCountry} onChange={e => setNewCountry(e.target.value)}/></div>
-      <Countries listOfCountryNames={listOfCountryNames} newCountry={newCountry} countryData={countryData} />
+      <Countries listOfCountryNames={listOfCountryNames} newCountry={newCountry} countryData={countryData} countryToShow={countryToShow} setCountryToShow={setCountryToShow} />
     </>
   )
 }
