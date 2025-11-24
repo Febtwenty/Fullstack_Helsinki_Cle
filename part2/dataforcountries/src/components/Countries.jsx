@@ -15,19 +15,25 @@ const Countries = ({ listOfCountryNames, newCountry, countryData }) => {
             country.name.common.toLowerCase().includes(newCountry.toLowerCase())
         )
         console.log(dataOfSingleCountry)
-        const languagesCountry = []
+        var languagesCountry = []
         for (const [key, value] of Object.entries(dataOfSingleCountry[0].languages)) {
-            console.log(`${key}: ${value}`)
             languagesCountry = languagesCountry.concat(value)
         }
-        console.log(dataOfSingleCountry[0].languages)
-        console.log(languagesCountry)
 
         return (
             <div>
                 <h1>{countriesToShow}</h1>
-                <p>Capital: {dataOfSingleCountry[0].capital}</p>
-                <p>Area: {dataOfSingleCountry[0].area}</p>
+                <p>
+                    Capital: {dataOfSingleCountry[0].capital} <br/>
+                    Area: {dataOfSingleCountry[0].area}
+                </p>
+                <h1>Languages</h1>
+                <ul>
+                    {languagesCountry.map(language =>
+                        <li key={language}>{language}</li>
+                    )}
+                </ul>
+                <img src={dataOfSingleCountry[0].flags.png} alt={dataOfSingleCountry[0].flags.alt} />
             </div>
         )
     }
