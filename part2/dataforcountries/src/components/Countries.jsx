@@ -1,4 +1,6 @@
-const Countries = ({ listOfCountryNames, newCountry, countryData, countryToShow, setCountryToShow }) => {
+import Weather from "./Weather"
+
+const Countries = ({ listOfCountryNames, newCountry, countryData, countryToShow, setCountryToShow, weather, setWeather }) => {
 
     const countriesToShow = listOfCountryNames.filter(country => 
     country.toLowerCase().includes(newCountry.toLowerCase())
@@ -21,6 +23,9 @@ const Countries = ({ listOfCountryNames, newCountry, countryData, countryToShow,
             languagesCountry = languagesCountry.concat(value)
         }
 
+        const lat = dataOfSingleCountry[0].latlng[0]
+        const lng = dataOfSingleCountry[0].latlng[1]
+
         return (
             <div>
                 <h1>{countriesToShow}</h1>
@@ -35,6 +40,8 @@ const Countries = ({ listOfCountryNames, newCountry, countryData, countryToShow,
                     )}
                 </ul>
                 <img src={dataOfSingleCountry[0].flags.png} alt={dataOfSingleCountry[0].flags.alt} />
+
+                <Weather country={countryToShow} lat={lat} lng={lng} weather={weather} setWeather={setWeather} />
             </div>
         )
     }
@@ -49,6 +56,9 @@ const Countries = ({ listOfCountryNames, newCountry, countryData, countryToShow,
         for (const [key, value] of Object.entries(dataOfSingleCountry[0].languages)) {
             languagesCountry = languagesCountry.concat(value)
         }
+
+        const lat = dataOfSingleCountry[0].latlng[0]
+        const lng = dataOfSingleCountry[0].latlng[1]
 
         return (
             <div>
@@ -65,6 +75,8 @@ const Countries = ({ listOfCountryNames, newCountry, countryData, countryToShow,
                 </ul>
                 <img src={dataOfSingleCountry[0].flags.png} alt={dataOfSingleCountry[0].flags.alt} /> <br />
                 <button onClick={() => setCountryToShow('')}>Exit</button>
+
+                <Weather country={countryToShow} lat={lat} lng={lng} weather={weather} setWeather={setWeather} />
             </div>
         )
     }
