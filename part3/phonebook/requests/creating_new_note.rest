@@ -1,0 +1,26 @@
+GET http://localhost:3001/api/persons/
+
+### New entry
+POST http://localhost:3001/api/persons/
+Content-Type: application/json
+
+{
+    "name": "Febtwenty",
+    "number": "0123456-123"
+}
+
+### name missing
+POST http://localhost:3001/api/persons/
+Content-Type: application/json
+
+{
+    "number": "0123456-123"
+}
+
+### number missing
+POST http://localhost:3001/api/persons/
+Content-Type: application/json
+
+{
+    "name": "Febtwenty"
+}
