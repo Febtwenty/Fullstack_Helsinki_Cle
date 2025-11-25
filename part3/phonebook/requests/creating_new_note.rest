@@ -9,6 +9,15 @@ Content-Type: application/json
     "number": "0123456-123"
 }
 
+### New entry 2
+POST http://localhost:3001/api/persons/
+Content-Type: application/json
+
+{
+    "name": "Febtwentytwo",
+    "number": "4312-123"
+}
+
 ### name missing
 POST http://localhost:3001/api/persons/
 Content-Type: application/json
