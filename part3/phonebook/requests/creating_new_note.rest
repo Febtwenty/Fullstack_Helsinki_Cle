@@ -1,7 +1,7 @@
-GET http://localhost:3001/api/persons/
+GET https://phonebook-wq80.onrender.com/api/persons/
 
 ### New entry
-POST http://localhost:3001/api/persons/
+POST https://phonebook-wq80.onrender.com/api/persons/
 Content-Type: application/json
 
 {
@@ -10,7 +10,7 @@ Content-Type: application/json
 }
 
 ### New entry 2
-POST http://localhost:3001/api/persons/
+POST https://phonebook-wq80.onrender.com/api/persons/
 Content-Type: application/json
 
 {
@@ -19,7 +19,7 @@ Content-Type: application/json
 }
 
 ### name missing
-POST http://localhost:3001/api/persons/
+POST https://phonebook-wq80.onrender.com/api/persons/
 Content-Type: application/json
 
 {
@@ -27,7 +27,7 @@ Content-Type: application/json
 }
 
 ### number missing
-POST http://localhost:3001/api/persons/
+POST https://phonebook-wq80.onrender.com/api/persons/
 Content-Type: application/json
 
 {
