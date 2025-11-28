@@ -28,7 +28,7 @@ const App = () => {
     if (checkNames.includes(newName)) {
       if (confirm(`${newName} was already added to phonebook. Replace the old number with the new one?`)) {
         const personToChange = persons.find(p => p.name === newName)
-        const changedPerson = {...personToChange, number: newNumber}
+        const changedPerson = {...personToChange, phonenumber: newNumber}
         phonebookServices
           .updateEntry(changedPerson.id, changedPerson)
           .then(response => {
@@ -46,7 +46,7 @@ const App = () => {
       }
     } else {
       phonebookServices
-        .create({name: newName, number: newNumber})
+        .create({name: newName, phonenumber: newNumber})
         .then(r => {
           setPersons(persons.concat(r))
           setNewName('')

@@ -24,7 +24,7 @@ const Numbers = ({ persons, filter, setPersons }) => {
             <ul>
                 {personsToShow.map(person => 
                     <li key={person.name}>
-                        {person.name} {person.number}
+                        {person.name} {person.phonenumber}
                         <button onClick={() => deleteContactOf(person.id, person.name)}>Delete Contact</button>
                     </li>
                 )}
