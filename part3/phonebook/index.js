@@ -5,27 +5,31 @@ const Contact = require('./models/contact')
 
 const app = express()
 
-app.use(express.json())
 app.use(express.static('dist'))
+app.use(express.json())
 
+// Morgan logger
 morgan.token('body', req => {
   return JSON.stringify(req.body)
 })
 
 app.use(morgan(':method :url :status :res[content-length] - :response-time ms :body'))
 
+// Get all notes, root
 app.get('/', (req, res) => {
     res.send(
         '<h1>Hello Visitor!</h1>'
     )
 })
 
+// Display all notes of the DB
 app.get('/api/persons', (req, res) => {
   Contact.find({}).then(contacts => {
   res.json(contacts)
   })
 })
 
+// DEPRECATED, Info about phonebook
 app.get('/info', (req, res) => {
     const lengthPhonebook = persons.length
     console.log(lengthPhonebook)
@@ -37,6 +41,7 @@ app.get('/info', (req, res) => {
     )
 })
 
+// DEPRECATED, Display one particular phonebook entry of the DB
 app.get('/api/persons/:id', (req, res) => {
   const id = req.params.id
   const person = persons.find(person => person.id === id)
@@ -48,13 +53,15 @@ app.get('/api/persons/:id', (req, res) => {
   }
 })
 
+// Delete one particular phonebook entry of the DB
 app.delete('/api/persons/:id', (req, res) => {
-  const id = req.params.id
-  persons = persons.filter(person => person.id !== id)
-
-  res.status(204).end()
+  Contact.findByIdAndDelete(req.params.id)
+    .then(result => {
+      res.status(204).end()
+    })
 })
 
+// Add a new phonebook entry to the DB
 app.post('/api/persons', (req, res) => {
   const body = req.body
 
@@ -63,13 +70,6 @@ app.post('/api/persons', (req, res) => {
       error: 'name or number missing'
     })
   }
-  
-  // const name = body.name
-  // if (persons.find(person => person.name === name)) {
-  //   return res.status(400).json({
-  //       error: 'name must be unique'
-  //   })
-  // }
 
   const contact = new Contact({
     name: body.name,
@@ -81,6 +81,7 @@ app.post('/api/persons', (req, res) => {
   })
 })
 
+// Start
 const PORT = process.env.PORT || 3001
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`)
