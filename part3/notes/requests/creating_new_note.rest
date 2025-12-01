@@ -25,3 +25,15 @@ Content-Type: application/json
 {
     "important": true
 }
+
+### ALTER A NOTE
+PUT http://localhost:3001/api/notes/692d52ff0dbcb9b0a19c982f
+Content-Type: application/json
+
+{
+    "content": "VS Code REST is good in testing the backend",
+    "important": true
+}
+
+### DELETE
+DELETE http://localhost:3001/api/notes/692d527be2c2e2072fd93e38
