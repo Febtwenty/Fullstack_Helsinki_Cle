@@ -54,11 +54,12 @@ app.get('/api/persons/:id', (req, res) => {
 })
 
 // Delete one particular phonebook entry of the DB
-app.delete('/api/persons/:id', (req, res) => {
+app.delete('/api/persons/:id', (req, res, next) => {
   Contact.findByIdAndDelete(req.params.id)
     .then(result => {
       res.status(204).end()
     })
+    .catch(error => next(error))
 })
 
 // Add a new phonebook entry to the DB
@@ -80,6 +81,19 @@ app.post('/api/persons', (req, res) => {
     res.json(savedContact)
   })
 })
+
+// Error Handling
+const errorHandler = (error, req, res, next) => {
+  console.error(error.message)
+
+  if (error.name === 'CastError') {
+    return res.status(400).send({ error: 'malformatted id' })
+  }
+
+  next(error)
+}
+
+app.use(errorHandler)
 
 // Start
 const PORT = process.env.PORT || 3001
