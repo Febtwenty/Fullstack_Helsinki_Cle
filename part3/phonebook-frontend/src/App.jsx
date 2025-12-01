@@ -53,11 +53,19 @@ const App = () => {
           setPersons(persons.concat(r))
           setNewName('')
           setNewNumber('')
+          setNameNotification(newName)
         })
-      setNameNotification(newName)
-      setTimeout(() => {
-        setNameNotification(null)
-      }, 3000)
+        .catch(error => {
+          setErrorMessage(
+              `${error.response.data.error}`
+            )
+            setTimeout(() => {
+              setErrorMessage(null)
+            }, 3000)
+        })
+        setTimeout(() => {
+          setNameNotification(null)
+        }, 3000)
     }
   }
 
