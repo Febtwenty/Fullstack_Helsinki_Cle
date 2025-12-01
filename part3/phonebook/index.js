@@ -41,16 +41,17 @@ app.get('/info', (req, res) => {
     )
 })
 
-// DEPRECATED, Display one particular phonebook entry of the DB
-app.get('/api/persons/:id', (req, res) => {
-  const id = req.params.id
-  const person = persons.find(person => person.id === id)
-
-  if (person) {
-    res.json(person)
-  } else {
-    res.status(404).end()
-  }
+// Display one particular phonebook entry of the DB
+app.get('/api/persons/:id', (req, res, next) => {
+  Contact.findById(req.params.id)
+    .then(contact => {
+        if (contact) {
+          res.json(contact)
+        } else {
+          res.status(404).end()
+        }
+      })
+    .catch(error => next(error))
 })
 
 // Delete one particular phonebook entry of the DB
