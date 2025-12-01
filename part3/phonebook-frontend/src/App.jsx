@@ -33,6 +33,8 @@ const App = () => {
           .updateEntry(changedPerson.id, changedPerson)
           .then(response => {
             setPersons(persons.map(p => p.id === personToChange.id ? response : p))
+            setNewName('')
+            setNewNumber('')
           })
           .catch(error => {
             setErrorMessage(

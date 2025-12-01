@@ -1,0 +1,11 @@
+### Get all entries
+GET http://localhost:3001/api/persons/
+
+### Alter entry
+PUT http://localhost:3001/api/persons/6929ae1bcf82533f49049e85
+Content-Type: application/json
+
+{
+    "name": "Anna",
+    "phonenumber": "4312-123"
+}

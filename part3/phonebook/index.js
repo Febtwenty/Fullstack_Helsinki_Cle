@@ -82,6 +82,26 @@ app.post('/api/persons', (req, res) => {
   })
 })
 
+// Update a single entry
+app.put('/api/persons/:id', (req, res, next) => {
+  const { name, phonenumber } = req.body
+
+  Contact.findById(req.params.id)
+    .then(contact => {
+      if (!contact) {
+        return res.status(404).end
+      }
+
+      contact.name = name
+      contact.phonenumber = phonenumber
+
+      return contact.save().then((updatedContact) => {
+        res.json(updatedContact)
+      })
+    })
+    .catch(error => next(error))
+})
+
 // Error Handling
 const errorHandler = (error, req, res, next) => {
   console.error(error.message)
