@@ -21,14 +21,14 @@ const validator = (val) => {
 const contactSchema = new mongoose.Schema({
   name: {
     type: String,
-    minLength: 3,
+    minLength: [3, 'Name too short'],
     required: true
   },
   phonenumber: {
     type: String,
     minLength: 8,
     required: true,
-    validate: validator
+    validate: [validator, 'Wrong phonenumber format']
   },
 })
 
