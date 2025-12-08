@@ -17,47 +17,35 @@ app.use(morgan(':method :url :status :res[content-length] - :response-time ms :b
 
 // Get all notes, root
 app.get('/', (req, res) => {
-    res.send(
-        '<h1>Hello Visitor!</h1>'
-    )
+  res.send(
+    '<h1>Hello Visitor!</h1>'
+  )
 })
 
 // Display all notes of the DB
 app.get('/api/persons', (req, res) => {
   Contact.find({}).then(contacts => {
-  res.json(contacts)
+    res.json(contacts)
   })
-})
-
-// DEPRECATED, Info about phonebook
-app.get('/info', (req, res) => {
-    const lengthPhonebook = persons.length
-    console.log(lengthPhonebook)
-    res.send(`
-        <div>
-            Phonebook has info for ${lengthPhonebook} people. <br/>
-            ${new Date()}
-        </div>`
-    )
 })
 
 // Display one particular phonebook entry of the DB
 app.get('/api/persons/:id', (req, res, next) => {
   Contact.findById(req.params.id)
     .then(contact => {
-        if (contact) {
-          res.json(contact)
-        } else {
-          res.status(404).end()
-        }
-      })
+      if (contact) {
+        res.json(contact)
+      } else {
+        res.status(404).end()
+      }
+    })
     .catch(error => next(error))
 })
 
 // Delete one particular phonebook entry of the DB
 app.delete('/api/persons/:id', (req, res, next) => {
   Contact.findByIdAndDelete(req.params.id)
-    .then(result => {
+    .then(() => {
       res.status(204).end()
     })
     .catch(error => next(error))
@@ -77,7 +65,7 @@ app.post('/api/persons', (req, res, next) => {
     name: body.name,
     phonenumber: body.phonenumber,
   })
-  
+
   contact.save()
     .then(savedContact => {
       res.json(savedContact)
