@@ -39,26 +39,26 @@ app.get('/favicon.ico', (request, response) => response.status(204).end())
 
 // Get all notes, root
 app.get('/', (request, response) => {
-    response.send('<h1>Hello World!</h1>')
+  response.send('<h1>Hello World!</h1>')
 })
 
 // Display all notes of the DB
 app.get('/api/notes', (request, response) => {
-    Note.find({}).then(notes => {
-      response.json(notes)
-    })
+  Note.find({}).then(notes => {
+    response.json(notes)
+  })
 })
 
 // Display one particular note of the DB
 app.get('/api/notes/:id', (request, response, next) => {
   Note.findById(request.params.id)
     .then(note => {
-        if (note) {
-          response.json(note)
-        } else {
-          response.status(404).end()
-        }
-      })
+      if (note) {
+        response.json(note)
+      } else {
+        response.status(404).end()
+      }
+    })
     .catch(error => next(error))
 })
 
@@ -79,7 +79,7 @@ app.post('/api/notes', (request, response, next) => {
     content: body.content,
     important: body.important || false,
   })
-  
+
   note.save()
     .then(savedNote => {
       response.json(savedNote)
