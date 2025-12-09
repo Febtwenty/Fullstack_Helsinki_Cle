@@ -5,9 +5,9 @@ POST http://localhost:3003/api/blogs/
 Content-Type: application/json
 
 {
-    "title": "Hello World 2",
-    "author": "Hannibal",
+    "title": "Hello World 5",
+    "author": "Yippie",
     "url": "www.google.com",
-    "likes": "1"
+    "likes": "111"
 }
 
