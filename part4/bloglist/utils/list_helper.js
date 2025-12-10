@@ -12,4 +12,17 @@ const totalLikes = (blogs) => {
     : blogs.reduce(reducer, 0)
 }
 
-module.exports = { dummy, totalLikes }
+const favoriteBlog = (blogs) => {
+  let favorite = blogs[0]
+
+  blogs.map(blog => {
+    if (blog.likes >= favorite.likes) {
+      favorite = blog
+    }
+  })
+
+  return favorite
+}
+
+
+module.exports = { dummy, totalLikes, favoriteBlog }
