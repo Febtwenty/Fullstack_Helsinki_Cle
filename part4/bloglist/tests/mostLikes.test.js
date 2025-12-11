@@ -1,7 +1,7 @@
 const { test, describe } = require('node:test')
 const assert = require('node:assert')
 
-const mostBlogs = require('../utils/list_helper').mostBlogs
+const mostLikes = require('../utils/list_helper').mostLikes
 
 const blogs = [
   {
@@ -54,7 +54,7 @@ const blogs = [
   }
 ]
 
-describe('most Blogs', () => {
+describe('most Likes', () => {
   const listWithOneBlog = [
     {
       _id: '5a422aa71b54a676234d17f8',
@@ -66,15 +66,15 @@ describe('most Blogs', () => {
     }
   ]
 
-  test('when list has only one blog, it returns the author of that blog', () => {
-    assert.deepStrictEqual(mostBlogs(listWithOneBlog), { author: 'Edsger W. Dijkstra', blogs: 1 })
+  test('when list has only one author/blog, it returns the likes of that author', () => {
+    assert.deepStrictEqual(mostLikes(listWithOneBlog), { author: 'Edsger W. Dijkstra', likes: 5 })
   })
 
-  test('when list has multiple entries, it returns the author with the most blogs.', () => {
-    assert.deepStrictEqual(mostBlogs(blogs), { author: 'Ada Lala', blogs: 3 })
+  test('when list has multiple entries, it returns the author with the most likes.', () => {
+    assert.deepStrictEqual(mostLikes(blogs), { author: 'Ada Lala', likes: 36 })
   })
 
   test('when the array is empty it returns 0.', () => {
-      assert.strictEqual(mostBlogs([]), 0)
+      assert.strictEqual(mostLikes([]), 0)
   })
 })

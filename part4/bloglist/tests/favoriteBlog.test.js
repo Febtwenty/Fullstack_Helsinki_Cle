@@ -49,4 +49,8 @@ describe('favorite Blog', () => {
   test('when list has multiple entries, it returns the one with the most likes.', () => {
     assert.strictEqual(favoriteBlog(blogs), blogs[2])
   })
+
+  test('when the array is empty it returns 0.', () => {
+      assert.strictEqual(favoriteBlog([]), 0)
+  })
 })

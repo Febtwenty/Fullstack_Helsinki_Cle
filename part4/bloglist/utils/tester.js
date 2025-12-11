@@ -70,3 +70,18 @@ const mostBlogs = (blogs) => {
   const returnAuthor = {author: mostActive, blogs: authors[mostActive]}
   return returnAuthor
 }
+
+const mostLikes = (blogs) => {
+  const authorsGrouped = _.groupBy(blogs, 'author')
+  const likesOfAuthors = _.map(authorsGrouped, (authorBlogs, author) => ({
+    author: author, 
+    likes: _.sumBy(authorBlogs, 'likes')
+    })
+  )
+  
+  const authorWithMostLikes = _.maxBy(likesOfAuthors,'likes')
+
+  return authorWithMostLikes
+}
+
+console.log(mostLikes(blogs))
