@@ -1,4 +1,7 @@
-const _ = require('lodash')
+const { test, describe } = require('node:test')
+const assert = require('node:assert')
+
+const mostBlogs = require('../utils/list_helper').mostBlogs
 
 const blogs = [
   {
@@ -51,22 +54,23 @@ const blogs = [
   }
 ]
 
-const favoriteBlog = (blogs) => {
-  let favorite = blogs[0]
-
-  blogs.map(blog => {
-    if (blog.likes >= favorite.likes) {
-      favorite = blog
+describe('most Blogs', () => {
+  const listWithOneBlog = [
+    {
+      _id: '5a422aa71b54a676234d17f8',
+      title: 'Go To Statement Considered Harmful',
+      author: 'Edsger W. Dijkstra',
+      url: 'https://homepages.cwi.nl/~storm/teaching/reader/Dijkstra68.pdf',
+      likes: 5,
+      __v: 0
     }
+  ]
+
+  test('when list has only one blog, it returns the author of that blog', () => {
+    assert.deepStrictEqual(mostBlogs(listWithOneBlog), { author: 'Edsger W. Dijkstra', blogs: 1 })
   })
-  return favorite
-}
 
-const mostBlogs = (blogs) => {
-  const authors = _.countBy(blogs, 'author')
-  
-  const mostActive = Object.keys(authors).reduce((a, b) => authors[a] > authors[b] ? a : b)
-
-  const returnAuthor = {author: mostActive, blogs: authors[mostActive]}
-  return returnAuthor
-}
+  test('when list has multiple entries, it returns the author with the most blogs.', () => {
+    assert.deepStrictEqual(mostBlogs(blogs), { author: 'Ada Lala', blogs: 3 })
+  })
+})
