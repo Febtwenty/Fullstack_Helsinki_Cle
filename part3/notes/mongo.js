@@ -7,7 +7,7 @@ if (process.argv.length < 3) {
 
 const password = process.argv[2]
 
-const url = `mongodb+srv://cleopold_db_user:${password}@cluster0.tzcg2ss.mongodb.net/noteApp?appName=Cluster0`
+const url = `mongodb+srv://cleopold_db_user:${password}@cluster0.tzcg2ss.mongodb.net/testNoteApp?retryWrites=true&w=majority&appName=Cluster0`
 
 mongoose.set('strictQuery', false)
 mongoose.connect(url, { family: 4 })
@@ -20,8 +20,8 @@ const noteSchema = new mongoose.Schema({
 const Note = mongoose.model('Note', noteSchema)
 
 const note = new Note({
-    content: 'GET and POST are the most important methods of HTTP protocol',
-    important: true,
+    content: 'HTML is easy',
+    important: false,
 })
 
 note.save().then(result => {
