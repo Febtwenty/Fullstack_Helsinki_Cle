@@ -79,6 +79,24 @@ test('a valid blog can be added', async () => {
     assert(contents.includes('New blogpost for testing'))
 })
 
+test('missing likes value defaults to "0"', async () => {
+  const newBlog = {
+    title: 'Another new blogpost for testing',
+    author: 'likes dev',
+    url: 'www.google.com',
+  }
+
+  await api
+    .post('/api/blogs')
+    .send(newBlog)
+    .expect(201)
+    .expect('Content-Type', /application\/json/)
+
+    const blogsAtEnd = await api.get('/api/blogs')
+    const likesOfLatest = blogsAtEnd.body[blogsAtEnd.body.length -1].likes
+    assert.strictEqual(0, likesOfLatest)
+})
+
 after(async () => {
   await mongoose.connection.close()
 })
