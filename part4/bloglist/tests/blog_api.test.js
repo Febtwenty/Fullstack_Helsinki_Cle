@@ -119,6 +119,18 @@ test('missing title or url results in 400 bad request', async () => {
     .expect(400)
 })
 
+test('a blogpost can be deleted', async () => {
+  const response = await api.get('/api/blogs')
+  const idFirstBlog = response.body[0].id
+
+  await api
+    .delete(`/api/blogs/${idFirstBlog}`)
+    .expect(204)
+
+  const blogsAfter = await api.get('/api/blogs')
+  assert.strictEqual(blogsAfter.body.length, initialBlogs.length - 1)
+})
+
 after(async () => {
   await mongoose.connection.close()
 })
