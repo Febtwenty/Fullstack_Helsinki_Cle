@@ -131,6 +131,30 @@ test('a blogpost can be deleted', async () => {
   assert.strictEqual(blogsAfter.body.length, initialBlogs.length - 1)
 })
 
+test('a blog can be altered', async () => {
+  const response = await api.get('/api/blogs')
+  const idFirstBlog = response.body[0].id
+
+  const alteredBlog = {
+    title: 'Altered blogpost for testing',
+    author: 'async',
+    url: 'www.googlers.com',
+    likes: 20124,
+  }
+
+  await api
+    .put(`/api/blogs/${idFirstBlog}`)
+    .send(alteredBlog)
+    .expect(200)
+    .expect('Content-Type', /application\/json/)
+
+    const afterAlteration = await api.get('/api/blogs')
+    assert.strictEqual(afterAlteration.body[0].title, alteredBlog.title)
+    assert.strictEqual(afterAlteration.body[0].author, alteredBlog.author)
+    assert.strictEqual(afterAlteration.body[0].url, alteredBlog.url)
+    assert.strictEqual(afterAlteration.body[0].likes, alteredBlog.likes)
+})
+
 after(async () => {
   await mongoose.connection.close()
 })

@@ -1,0 +1,13 @@
+GET http://localhost:3003/api/blogs/
+
+###
+PUT http://localhost:3003/api/blogs/69382b2168e7a9c5aa791416
+Content-Type: application/json
+
+{
+    "title": "Altered Hello World 3",
+    "author": "alternator",
+    "url": "www.google.com",
+    "likes": "111"
+}
+
