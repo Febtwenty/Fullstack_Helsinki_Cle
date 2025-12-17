@@ -97,6 +97,28 @@ test('missing likes value defaults to "0"', async () => {
     assert.strictEqual(0, likesOfLatest)
 })
 
+test('missing title or url results in 400 bad request', async () => {
+  const missingUrlBlog = {
+    title: 'Missing url',
+    author: 'likes dev',
+  }
+
+  await api
+    .post('/api/blogs')
+    .send(missingUrlBlog)
+    .expect(400)
+  
+  const missingTitleBlog = {
+    author: 'likes dev',
+    url: 'www.google.com'
+  }
+
+  await api
+    .post('/api/blogs')
+    .send(missingTitleBlog)
+    .expect(400)
+})
+
 after(async () => {
   await mongoose.connection.close()
 })
