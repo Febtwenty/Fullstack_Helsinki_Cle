@@ -40,13 +40,13 @@ test('blogs are returned as json', async () => {
 test('all blogs are returned', async () => {
   const response = await api.get('/api/blogs')
 
-  assert.strictEqual(response.body.length, 2)
+  assert.strictEqual(response.body.length, initialBlogs.length)
 })
 
 test('a specific blog is within the returned blogs', async () => {
   const response = await api.get('/api/blogs')
   
-  const contents = response.body.map(e => e.title)
+  const contents = response.body.map(r => r.title)
   assert(contents.includes('Felix is cool'))
 })
 
@@ -56,6 +56,27 @@ test('the unique identifyier is called "id"', async() => {
   const blogs_keys = Object.keys(response.body[0])
   assert(blogs_keys.includes('id'))
   assert(!blogs_keys.includes('_id'))
+})
+
+test('a valid blog can be added', async () => {
+  const newBlog = {
+    title: 'New blogpost for testing',
+    author: 'async',
+    url: 'www.google.com',
+    likes: 2,
+  }
+
+  await api
+    .post('/api/blogs')
+    .send(newBlog)
+    .expect(201)
+    .expect('Content-Type', /application\/json/)
+
+    const blogsAtEnd = await api.get('/api/blogs')
+    assert.strictEqual(blogsAtEnd.body.length, initialBlogs.length + 1)
+
+    const contents = blogsAtEnd.body.map(r => r.title)
+    assert(contents.includes('New blogpost for testing'))
 })
 
 after(async () => {
